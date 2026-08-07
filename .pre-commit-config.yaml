@@ -1,0 +1,38 @@
+# Pre-commit hooks configuration
+# Run: pre-commit install to enable
+# Run: pre-commit run --all-files to test
+
+repos:
+  # All tools run via UV to use project's locked dependencies
+  - repo: local
+    hooks:
+      # Stage 1: Black - Code formatting
+      - id: black
+        name: black
+        entry: uv run black .
+        language: system
+        types: [python]
+        pass_filenames: false
+        always_run: true
+        description: "Format Python code with Black"
+
+      # Stage 2: Ruff - Linting and import sorting
+      - id: ruff
+        name: ruff
+        entry: uv run ruff check .
+        language: system
+        types: [python]
+        pass_filenames: false
+        always_run: true
+        description: "Lint Python code with Ruff"
+
+      # Stage 3: Mypy - Type checking
+      - id: mypy
+        name: mypy
+        entry: uv run mypy .
+        language: system
+        types: [python]
+        pass_filenames: false
+        require_serial: true
+        always_run: true
+        description: "Type check Python code with MyPy"

@@ -1,0 +1,13 @@
+[project]
+name = "Rapid-Redact"
+description = "PDF redaction tool for clinical documents"
+product = "Rapid Redact"
+version = "0.1.0"
+company = "Rapid Redact"
+
+[build]
+# Icon file (place in project root)
+# icon = "app.ico"
+
+[build.windows]
+# Windows-specific build settings

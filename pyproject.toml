@@ -1,0 +1,132 @@
+[project]
+name = "rapid-redact"
+version = "0.1.0"
+description = "PDF redaction tool"
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "flet[all]==0.28.3",
+    "litellm>=1.0.0",
+    "openpyxl==3.1.5",
+    "pandas==3.0.3",
+    "pyinstaller==6.21.0",
+    "pymupdf==1.27.2.3",
+    "python-dotenv>=1.2.0",
+    "rapidfuzz>=3.0.0",
+    "urllib3>=2.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "black",
+    "ruff",
+    "mypy",
+    "pandas-stubs>=3.0.3.260530",
+    "types-openpyxl>=3.1.5.20260518",
+    "bandit>=1.7.5",
+    "radon>=6.0.1",
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "deptry>=0.12.0",
+    "pre-commit>=3.5.0",
+    "types-requests>=2.33.0.20260518",
+    "types-urllib3>=1.26.25.14",
+]
+
+[tool.uv]
+system-certs = true
+
+[tool.black]
+target-version = ["py313"]
+line-length = 88
+
+[tool.mypy]
+strict = true
+ignore_missing_imports = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+no_implicit_optional = true
+strict_equality = true
+warn_unreachable = true
+disallow_any_explicit = true
+disallow_any_generics = true
+disallow_subclassing_any = true
+python_version = "3.13"
+explicit_package_bases = true
+exclude = ['^main\.py$', '^build/', '^dist/', '^vulture_whitelist\.py$']
+
+[[tool.mypy.overrides]]
+module = ["fitz", "fitz.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["flet", "flet.*"]
+ignore_missing_imports = true
+
+[tool.bandit]
+# Skip checks that are false positives for GUI apps
+# B105: False positive on "N/A" placeholder string in UI display
+skips = ["B110", "B112", "B101", "B606", "B105"]
+
+[tool.ruff.lint]
+# Ignore F821 (undefined name) for forward references with quoted strings
+# This is necessary because MainController and sub-controllers have circular dependencies
+# We use string quotes for forward references per TYPING.md guidelines
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+# Allow forward references to MainController in controller and tab files
+"src/controllers/*.py" = ["F821"]
+"src/tabs/*.py" = ["F821"]
+"src/ui_layout.py" = ["F821"]
+# Vulture whitelist uses special syntax with undefined names
+"vulture_whitelist.py" = ["F821"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--cov=src",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+]
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__pycache__/*",
+    "*/site-packages/*",
+]
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
+# Target 60% coverage but don't fail builds
+fail_under = 0
+
+[tool.deptry]
+# Exclude additional files/directories
+extend_exclude = ["vulture_whitelist.py", "build", "dist"]
+
+# Tell deptry that 'src' and 'ai' are first-party code (not dependencies)
+known_first_party = ["src", "ai"]
+
+# Ignore specific error codes per package/module
+# DEP002 = obsolete dependencies (unused declared deps)
+# flet-modifier-key: Reserved for future keyboard shortcut functionality
+# pyinstaller: Build tool used by build.bat, not imported in code
+[tool.deptry.per_rule_ignores]
+DEP001 = ["types-.*", "pandas-stubs"]
+DEP002 = ["flet-modifier-key", "pyinstaller"]

@@ -1,0 +1,79 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Package Management
+*.egg-info/
+.eggs/
+.uv/
+
+# Build & Distribution
+build/
+dist/
+*.exe
+*.msi
+
+# PyInstaller
+!main.spec
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+test-results/
+
+# Type Checking & Linting
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+*.stackdump
+$RECYCLE.BIN/
+.directory
+
+# Secrets & Config
+.env
+.env.local
+*.secret
+secrets/
+credentials.json
+
+# Application Data
+storage/
+temp/
+tmp/
+*.tmp
+*.log
+check_run_output.txt
+
+# Inno Setup Output
+installer_output/
+Output/
+
+# Claude Code
+.claude/worktrees/
+
+# Backup Files
+*.bak
+*.backup
+*.orig
+*.swp
+*~
