@@ -11,14 +11,14 @@ A Windows desktop application for searching and redacting sensitive information 
 All system screenshots are organized in [`docs/screenshots/`](docs/screenshots/):
 
 ### [->] Main Application Interface
-| PDF Viewer & Redaction Controls | Search Results & Preview | Export Options |
+| Viewer & Manual Redaction | Search Term Matching | Menu Screen & Export Options |
 | :---: | :---: | :---: |
-| *Coming Soon* | *Coming Soon* | *Coming Soon* |
+| ![Viewer and Manual Redaction](docs/screenshots/Viewer%20and%20Manual%20redaction.png) | ![Search Term Matching](docs/screenshots/Search%20Term%20Matching.png) | ![Menu Screen and Export Options](docs/screenshots/Menu%20Screen%20and%20Export%20options.png) |
 
-### [->] Configuration & Settings
-| Application Settings | Search Term Management | Batch Processing |
+### [->] Detection & Configuration
+| Search Term Configuration | Dose Detection | Scan With AI |
 | :---: | :---: | :---: |
-| *Coming Soon* | *Coming Soon* | *Coming Soon* |
+| ![Search Term Configuration](docs/screenshots/Search%20Term%20Configuration.png) | ![Dose Detection](docs/screenshots/Dose%20Detection.png) | ![Scan With AI](docs/screenshots/Scan%20With%20AI.png) |
 
 ---
 
